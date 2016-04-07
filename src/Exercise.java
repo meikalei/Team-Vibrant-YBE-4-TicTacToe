@@ -2,111 +2,92 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Exercise {
-		JFrame frame;
-		public Exercise(){
-			
-			this.frame = new JFrame("Tic-Tac-Toe");
-			this.frame.setLayout(new BorderLayout());
-			this.frame.setSize(500, 300);
-			
-			Buttons buttons = new Buttons();
-			//add(buttons, BorderLayout.SOUTH);
-
-			Field field = new Field();
-			//add(field);
+public class Exercise { 
+	JFrame frame = new JFrame("Tic-Tac-Toe");
 		
-			Display window = new Display();
-			//Label playerLabel = new Label();
-			Game game = new Game();
-			
-			//add(window, BorderLayout.CENTER);
-			this.frame.add(game, BorderLayout.CENTER);
-			
-			//setContentPane(board);
-			this.frame.setLocation(10, 10);
-			this.frame.setVisible(true);
-			this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		}
+	//added labels and text fields
+	JLabel label1 = new JLabel("Player 1 Name: ");
+	JTextField p1name = new JTextField(20);
+	JLabel label2 = new JLabel("Player 2 Name: ");
+	JTextField p2name = new JTextField(20);
+	JLabel label3 = new JLabel("Best of: ");
+	JTextField bestOf = new JTextField(20);
+	JLabel player1 = new JLabel("");
+	JLabel player2 = new JLabel("");
 
-	public static class Field extends JPanel {
-		JPanel panel;
-		public Field(){
-			this.panel = new JPanel();
-			this.panel.setLayout(new BorderLayout());
-			this.panel.setSize(500, 250);
+	JPanel panel = new JPanel();
+	
+	//buttons
+	JButton okButton = new JButton("Ok");
+	JButton cancelButton = new JButton("Cancel");
+	JPanel buttonPanel = new JPanel();
+
+	int best;
+
+	public Exercise() {
+		//created frame
+		this.frame.setLayout(new BorderLayout());
+		this.frame.setPreferredSize(new Dimension(500,300));
+
+		//layout
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints boxes = new GridBagConstraints();
+
+		boxes.gridx = 0;
+		boxes.gridy = 0;
+		panel.add(label1,boxes);
+			
+		boxes.gridx = 1;
+		boxes.gridy = 0;
+		panel.add(p1name,boxes);
+			
+		boxes.gridx = 0;
+		boxes.gridy = 1;
+		panel.add(label2,boxes);
+			
+		boxes.gridx = 1;
+		boxes.gridy = 1;
+		panel.add(p2name,boxes);
+			
+		boxes.gridx = 0;
+		boxes.gridy = 2;
+		panel.add(label3,boxes);
+			
+		boxes.gridx = 1;
+		boxes.gridy = 2;
+		panel.add(bestOf,boxes);
 		
-			TextField textField = new TextField();
-			add(textField, BorderLayout.CENTER);
-		}
-	
-	}
+		this.frame.add(panel,BorderLayout.CENTER);
 
-	public static class TextField extends JTextField {
-
-		TextField() {
-			setText("This is us");
-		}
-	} 
-	
-	private static class Display extends JPanel {
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawString("Player 1 Name: _________________", 130, 80);
-			g.drawString("Player 2 Name: _________________", 130, 110);
-			g.drawString("Best of: _________________", 178, 140);
-		}
-	}
-	
-	/*public static class Board extends JPanel {
-
-		Board() {
-			setLayout(new BorderLayout());
-			setSize(300, 300);
+		buttonPanel.setLayout(new FlowLayout());
 		
-			Game game = new Game();
-			add(game);
-		}
-	
-	}*/
-	
-	public static class Buttons extends JPanel implements ActionListener{
-		JPanel panel;
-		public Buttons() {
-			this.panel = new JPanel();
-			this.panel.setLayout(new GridLayout(1, 2));
-			this.panel.setPreferredSize(new Dimension(100, 50));
-			this.panel.setMaximumSize(new Dimension(100, 50));
-			
-			JButton okButton = new JButton("OK");
-			JButton cancelButton = new JButton("Cancel");
-			
-			this.panel.add(okButton);
-			this.panel.add(cancelButton);
-			
-			okButton.addActionListener(this);
-			cancelButton.addActionListener(this);
-		}
-		
-		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-		}
+		okButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {     
+            	String playerOne = p1name.getText();
+            	String playerTwo = p2name.getText();
+            	int intBest = Integer.parseInt(bestOf.getText());  // it must be edited
 
+            	player1.setText(playerOne);
+            	player2.setText(playerTwo);
+            	
+            	if (intBest % 2 == 0) {
+            		JOptionPane.showMessageDialog(null, "It must be an odd number");
+            	} else {
+	            	System.out.println("");  // get the integer input
+	            }
+            }
+        });
+
+		buttonPanel.add(okButton);
+		buttonPanel.add(cancelButton);
+			
+		this.frame.add(buttonPanel,BorderLayout.SOUTH);
+
+		this.frame.setLocation(10, 10);
+		this.frame.setVisible(true);
+		this.frame.setResizable(false);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.pack();
 	}
 	
-	public static class Game extends JPanel{
-		JButton G1, G2, G3, G4, G5, G6, G7, G8, G9;
-		private boolean player = false;
-		JPanel panel;
-		
-		Game() {
-			this.panel = new JPanel();
-			this.panel.setLayout(new GridLayout(3, 3));
-		}
-
-	}
-	
-	public static void main(String[] args) {
-		Exercise exer = new Exercise();
-	}
 }
