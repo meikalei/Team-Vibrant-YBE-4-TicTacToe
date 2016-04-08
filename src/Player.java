@@ -4,20 +4,20 @@ public class Player {
 	private int points = 0;
 	private boolean myTurn;
 	
-	public Player(String name) {
-		this.name = name;
-	}
-	
-	public void playerTurn(String[] board) { //mode is plyer 1 or player 2 num is turn number
-	
-	}
-	
 	public String getName() {
 		return this.name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public void addPoint() {
 		this.points += 1;
+	}
+	
+	public int getPoints() {
+		return this.points;
 	}
 	
 	public void setMyTurn(boolean turn){
