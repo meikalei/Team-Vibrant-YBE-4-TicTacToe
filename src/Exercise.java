@@ -21,7 +21,7 @@ public class Exercise implements ActionListener{
 		JPanel panel = new JPanel();
 		
 		JPanel bottom;
-		JLabel playerOne, playerTwo;
+		JLabel playerOne, playerTwo, gameRounds;
 			
 		public Exercise(){
 			//created frame
@@ -74,13 +74,15 @@ public class Exercise implements ActionListener{
 					
 					playerOne = new JLabel();
 					playerTwo = new JLabel();
+					gameRounds = new JLabel();
 					
-					playerOne.setText(player1);
-					playerTwo.setText(player2);
+					playerOne.setText(player1 + " (P1): ");
+					gameRounds.setText("Game __ out of " + intBest);
+					playerTwo.setText(player2 + " (P2): ");
 					
 					bottom.add(playerOne);
+					bottom.add(gameRounds);
 					bottom.add(playerTwo);
-					
 					if (intBest % 2 == 0)
 						JOptionPane.showMessageDialog(null, "It must be an odd integer");
 					//else if (intBest == null)
@@ -238,10 +240,10 @@ public class Exercise implements ActionListener{
 		
 		public void setText(JButton button, int turn) {
 			if (turn%2 == 1) {
-				button.setText("X");
+				button.setText("O");
 			}
 			else if (turn%2 == 0) {
-				button.setText("O");
+				button.setText("X");
 			}
 		}
 		/*public void switchPlayer(boolean play) {
