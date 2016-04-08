@@ -24,6 +24,16 @@ public class Square extends JButton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		this.turnNumber = this.turnNumber + 1;
 		System.out.println(turnNumber);
+		//switchPlayer(turn, player);
 	}
+		
+	/*public void switchPlayer(boolean turn, Player player) {
+		if (turn == true) {
+			player.setMyTurn(false);
+		}
+		else if (turn == false) {
+			player.setMyTurn(true);
+		}
+	}*/
 	
 }
