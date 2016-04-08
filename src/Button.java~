@@ -1,35 +1,39 @@
 import javax.swing.JButton;
 import java.awt.event.*;
 
-public class Button extends JButton{
+public class Square extends JButton implements ActionListener{
 	private Player player;
 	private boolean turn;
+	private int turnNumber = 0;
 
 	public Button(String name) {
 		JButton aButton = new JButton(name);
+		aButton.addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		changeChar(this, player);
-		switchPlayer(turn, player);
+		turnNumber += 1;
+		changeChar(this, turnNumber);
+		//switchPlayer(turn, player);
 		this.setEnabled(false);
 	}
 	
-	public void changeChar(JButton button, Player turn) {
-		if (turn.getMyTurn() == true) {
+	public void changeChar(JButton button, int turnNumber) {
+		if (turnNumber%2 == 1) {
 			button.setText("X");
 		}
-		else if (turn.getMyTurn() == false) {
+		else if (turnNumber%2 == 0) {
 			button.setText("O");
 		}
 	}
 		
-	public void switchPlayer(boolean turn, Player player) {
+	/*public void switchPlayer(boolean turn, Player player) {
 		if (turn == true) {
 			player.setMyTurn(false);
 		}
 		else if (turn == false) {
 			player.setMyTurn(true);
 		}
-	}
+	}*/
+	
 }
